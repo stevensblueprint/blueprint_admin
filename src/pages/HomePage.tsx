@@ -1,4 +1,4 @@
-import { Center, Container, HStack, Spinner, Text } from '@chakra-ui/react'
+import { Alert, AlertIcon, AlertTitle, AlertDescription, Box, Center, Container, HStack, Spinner } from '@chakra-ui/react'
 import TableDashboard from '../components/TableDashboard'
 import Sidebar from '../components/Sidebar'
 import { getAllUsers } from '../api/lib/users'
@@ -7,7 +7,8 @@ import React, { useEffect, useState } from 'react'
 
 function HomePage (): JSX.Element {
   const [members, setMembers] = React.useState<User[]>([])
-  const [error, setError] = useState<string | null>(null)
+  const [errorTitle, setErrorTitle] = useState<string | null>(null)
+  const [errorDesc, setErrorDesc] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
@@ -16,7 +17,8 @@ function HomePage (): JSX.Element {
       setIsLoading(false)
     }).catch((error) => {
       console.error(error)
-      setError('Failed to load Blueprint members. Please try again later.')
+      setErrorTitle('Failed to load Blueprint members.')
+      setErrorDesc('Please try again later.')
       setIsLoading(false)
     })
   }, [])
@@ -25,8 +27,19 @@ function HomePage (): JSX.Element {
     <HStack height="100vh" spacing="0">
       <Sidebar />
       <Container>
-      {isLoading ? <Center> <Spinner size="xl"/> </Center> : <TableDashboard members={members} />}
-      {error && <Text color="red.500">{error}</Text>}
+      {!errorTitle && !errorDesc
+        ? (isLoading
+            ? <Center> <Spinner size="xl"/> </Center>
+            : <TableDashboard members={members} />
+          )
+        : (<Alert status="error">
+            <AlertIcon/>
+            <Box>
+              <AlertTitle>{errorTitle}</AlertTitle>
+              <AlertDescription>{errorDesc}</AlertDescription>
+            </Box>
+          </Alert>)
+      }
       </Container>
     </HStack>
   )
