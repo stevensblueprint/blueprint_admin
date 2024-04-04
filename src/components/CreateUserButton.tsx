@@ -16,22 +16,28 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
-function CreateUserButton ({ displaySuccess, setDisplaySuccess }: { displaySuccess: boolean, setDisplaySuccess: React.Dispatch<React.SetStateAction<boolean>> }): JSX.Element {
+function CreateUserButton ({ setDisplaySuccess }: { displaySuccess: boolean, setDisplaySuccess: React.Dispatch<React.SetStateAction<boolean>> }): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [displayError, setDisplayError] = useState(false)
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
+  const [formData, setFormData] = useState({ email: '', roles: '' })
+  const [displayError, setDisplayError] = useState(false)
 
-  const handleSubmit: () => void = () => {
-    console.log('Form submitted')
-    // Check if correct
-    const apiState = true
-    if (!apiState) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = async (): Promise<void> => {
+    console.log('Form submitted', formData)
+    try {
+      const apiState = true
+      if (!apiState) throw new Error('API call failed')
+      setDisplaySuccess(true)
+      onClose()
+    } catch (error) {
       setDisplayError(true)
-      return
     }
-    setDisplaySuccess(true)
-    onClose()
   }
 
   return (
@@ -50,20 +56,36 @@ function CreateUserButton ({ displaySuccess, setDisplaySuccess }: { displaySucce
           <ModalHeader >Add User</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            {displayError ? <Alert status='error'> <AlertIcon /> Request failed </Alert> : <></>}
+          {displayError && (
+              <Alert status="error">
+                <AlertIcon />
+                Request failed
+              </Alert>
+          )}
             <FormControl>
               <FormLabel>Email</FormLabel>
-              <Input ref={initialRef} placeholder='Email' />
+              <Input
+                name="email"
+                placeholder="Email"
+                ref={initialRef}
+                onChange={handleChange}
+                value={formData.email}
+              />
             </FormControl>
 
             <FormControl mt={4}>
               <FormLabel>Roles</FormLabel>
-              <Input placeholder='Roles' />
+              <Input
+                name="roles"
+                placeholder="Roles"
+                onChange={handleChange}
+                value={formData.roles}
+              />
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={handleSubmit}> Accept </Button>
+          <Button colorScheme="blue" mr={3} onClick={() => handleSubmit()}>Accept</Button>
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
