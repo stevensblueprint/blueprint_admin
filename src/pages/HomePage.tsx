@@ -29,10 +29,10 @@ function HomePage (): JSX.Element {
       <Container>
       {!errorTitle && !errorDesc
         ? (isLoading
-            ? <Center> <Spinner size="xl"/> </Center>
+            ? <Center> <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" /> </Center>
             : <TableDashboard members={members} />
           )
-        : (<Alert status="error">
+        : (<Alert status="error" borderRadius="lg">
             <AlertIcon/>
             <Box>
               <AlertTitle>{errorTitle}</AlertTitle>
