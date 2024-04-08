@@ -16,7 +16,12 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
-function CreateUserButton ({ setDisplaySuccess }: { displaySuccess: boolean, setDisplaySuccess: React.Dispatch<React.SetStateAction<boolean>> }): JSX.Element {
+function CreateUserButton ({
+  setDisplaySuccess
+}: {
+  displaySuccess: boolean
+  setDisplaySuccess: React.Dispatch<React.SetStateAction<boolean>>
+}): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
@@ -28,22 +33,36 @@ function CreateUserButton ({ setDisplaySuccess }: { displaySuccess: boolean, set
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = async (): Promise<void> => {
+  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault()
     console.log('Form submitted', formData)
-    try {
-      const apiState = true
-      if (!apiState) throw new Error('API call failed')
-      setDisplaySuccess(true)
-      onClose()
-    } catch (error) {
-      setDisplayError(true)
-      console.error(error) // Log the error for debugging
+
+    const simulateApiCall = async (): Promise<void> => {
+      await new Promise<void>((resolve, reject) => {
+        const apiState = true
+        if (!apiState) {
+          reject(new Error('API call failed'))
+        } else {
+          resolve()
+        }
+      })
     }
+    simulateApiCall()
+      .then(() => {
+        setDisplaySuccess(true)
+        onClose()
+      })
+      .catch((error) => {
+        setDisplayError(true)
+        console.error(error)
+      })
   }
 
   return (
     <>
-      <Button onClick={onOpen} colorScheme='blue' >Add Users</Button>
+      <Button onClick={onOpen} colorScheme="blue">
+        Add Users
+      </Button>
 
       <Modal
         initialFocusRef={initialRef}
@@ -54,15 +73,15 @@ function CreateUserButton ({ setDisplaySuccess }: { displaySuccess: boolean, set
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader >Add User</ModalHeader>
+          <ModalHeader>Add User</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-          {displayError && (
+            {displayError && (
               <Alert status="error">
                 <AlertIcon />
                 Request failed
               </Alert>
-          )}
+            )}
             <FormControl>
               <FormLabel>Email</FormLabel>
               <Input
@@ -86,7 +105,9 @@ function CreateUserButton ({ setDisplaySuccess }: { displaySuccess: boolean, set
           </ModalBody>
 
           <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={handleSubmit}>Accept</Button>
+            <Button colorScheme="blue" mr={3} onClick={handleSubmit}>
+              Accept
+            </Button>
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
