@@ -37,6 +37,7 @@ function CreateUserButton ({ setDisplaySuccess }: { displaySuccess: boolean, set
       onClose()
     } catch (error) {
       setDisplayError(true)
+      console.error(error) // Log the error for debugging
     }
   }
 
@@ -85,7 +86,7 @@ function CreateUserButton ({ setDisplaySuccess }: { displaySuccess: boolean, set
           </ModalBody>
 
           <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={() => handleSubmit()}>Accept</Button>
+          <Button colorScheme="blue" mr={3} onClick={handleSubmit}>Accept</Button>
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
