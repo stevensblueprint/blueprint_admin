@@ -1,14 +1,11 @@
 import { Table, Thead, Tbody, Tr, Th, TableContainer } from '@chakra-ui/react'
+import { type User } from '../types/index'
 import React from 'react'
-// eslint-disable-next-line import/extensions
-import sampleUserData from '../sample_data.json'
 
-function TableDashboard (): JSX.Element {
-  const [sampleData] = React.useState(sampleUserData)
-
+function TableDashboard ({ members }: { members: User[] }): JSX.Element {
   return (
     <TableContainer>
-      <Table variant="simple" size='md'>
+      <Table variant="simple" size="md">
         <Thead>
           <Tr>
             <Th>Name</Th>
@@ -18,17 +15,22 @@ function TableDashboard (): JSX.Element {
           </Tr>
         </Thead>
         <Tbody>
-          {sampleData && Object.values(sampleData.Users)
-            .sort((a, b) => {
-              return a.Displayname.localeCompare(b.Displayname)
-            }).filter((user) => !user.Disabled)
-            .map(({ Displayname, Email, Disabled }) =>
-              <Tr key={Email}>
-                <Th>{Displayname}</Th>
-                <Th>{Email}</Th>
-                <Th></Th>
-                <Th>{Disabled ? 'Inactive' : 'Active'}</Th>
-              </Tr>
+          {members
+            .sort((a: User, b: User) => {
+              return a.name.localeCompare(b.name)
+            })
+            .filter((user: User) => !user.isEnabled)
+            .map(
+              (
+                { name, email, isEnabled }: User // Add type annotation for User
+              ) => (
+                <Tr key={email}>
+                  <Th>{name}</Th>
+                  <Th>{email}</Th>
+                  <Th></Th>
+                  <Th>{isEnabled ? 'Active' : 'Inactive'}</Th>
+                </Tr>
+              )
             )}
         </Tbody>
       </Table>

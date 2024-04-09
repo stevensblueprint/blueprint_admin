@@ -1,14 +1,22 @@
-import axios, { type AxiosRequestConfig, type Method, type AxiosResponse } from 'axios'
+import axios, {
+  type AxiosRequestConfig,
+  type Method,
+  type AxiosResponse
+} from 'axios'
 
 const apiClient = axios.create({
-  baseURL: 'https://auth.api.sitblueprint.com/api',
+  baseURL: 'https://dev.api.sitblueprint.com/api/v1',
   headers: {
     Accept: 'application/json',
     'Content-type': 'application/json'
   }
 } satisfies AxiosRequestConfig)
 
-const request = async (method: Method, url: string, params?: unknown): Promise<AxiosResponse> => {
+const request = async (
+  method: Method,
+  url: string,
+  params?: unknown
+): Promise<AxiosResponse> => {
   return await apiClient.request({ method, url, params })
 }
 

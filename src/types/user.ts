@@ -1,8 +1,12 @@
 export interface User {
+  id: string
+  name: string
   username: string
-  password: string
   email: string
-  displayName: string
-  role: string[]
-  enabled: boolean
+  password: string
+  hasBlueprintEmail: boolean
+  isEnabled: boolean
+  dateJoined: string
+  roles: string[]
+  team: string
 }

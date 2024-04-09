@@ -1,8 +1,5 @@
 function UserCard (): JSX.Element {
-  return (
-    <div>
-    </div>
-  )
+  return <div></div>
 }
 
 export default UserCard

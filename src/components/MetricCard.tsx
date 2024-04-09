@@ -13,7 +13,12 @@ interface MetricCardProps {
   change: 'increase' | 'decrease'
 }
 
-function MetricCard ({ label, statistic, changePercentage, change }: MetricCardProps): JSX.Element {
+function MetricCard ({
+  label,
+  statistic,
+  changePercentage,
+  change
+}: MetricCardProps): JSX.Element {
   return (
     <Stat>
       <StatLabel>{label}</StatLabel>
