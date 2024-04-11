@@ -1,9 +1,10 @@
-import { useState } from "react"; //for the save button that hasnt' been implemented
-import React from "react";
+import React, { useState } from "react"; //for the save button that hasnt' been implemented
 import sampleUserData from "../sample_data.json";
-import { useDisclosure } from "@chakra-ui/react";
-import { Button, ButtonGroup } from "@chakra-ui/react";
+
 import {
+  useDisclosure,
+  Button,
+  ButtonGroup,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -16,6 +17,8 @@ import {
   EditableTextarea,
   EditablePreview,
 } from "@chakra-ui/react";
+
+import { setTokenSourceMapRange } from "typescript";
 
 interface UserCardProps {
   buttonText: string;
@@ -33,6 +36,14 @@ function UserCard({
   title,
 }: UserCardProps): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [userName, setName] = useState(userName); //does this go here?
+  const [email, setEmail] = useState(email);
+  const [status, setStatus] = useState(status);
+  const [title, setTitle] = useState(title);
+  const saveChanges = () => {
+    onClose(); //close modal after saving
+  };
+
   return (
     <>
       <Button onClick={onOpen}>{buttonText}</Button>
@@ -44,37 +55,40 @@ function UserCard({
           <ModalCloseButton />
 
           <ModalBody>
-            Name:
-            <Editable>
-              {userName}
-              <EditablePreview /*need?*/ />
+            <p>Name:</p>
+            <Editable
+              defaultValue={userName}
+              onSubmit={(value) => setName(value)}
+            >
+              <EditablePreview />
               <EditableInput />
             </Editable>
-          </ModalBody>
 
-          <ModalBody>
-            Email:
-            <Editable>
-              {email}
-              <EditablePreview /*need?*/ />
+            <p>Email:</p>
+            <Editable
+              defaultValue={email}
+              onSubmit={(value) => setEmail(value)}
+            >
+              <EditablePreview />
               <EditableInput />
             </Editable>
-          </ModalBody>
 
-          <ModalBody>
-            Status:
-            <Editable>
+            <p>Status:</p>
+            <Editable
+              defaultValue={status}
+              onSubmit={(value) => setStatus(value)}
+            >
               {status}
-              <EditablePreview /*need?*/ />
+              <EditablePreview />
               <EditableInput />
             </Editable>
-          </ModalBody>
 
-          <ModalBody>
-            Title:
-            <Editable>
-              {}
-              <EditablePreview /*need?*/ />
+            <p>Title:</p>
+            <Editable
+              defaultValue={title}
+              onSubmit={(value) => setTitle(value)}
+            >
+              <EditablePreview />
               <EditableInput />
             </Editable>
           </ModalBody>
@@ -83,7 +97,7 @@ function UserCard({
             <Button colorScheme="blue" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button variant="ghost" onClick={onClose}>
+            <Button variant="ghost" onClick={saveChanges}>
               Save
             </Button>
           </ModalFooter>
