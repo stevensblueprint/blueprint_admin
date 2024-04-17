@@ -12,9 +12,9 @@ if (rootElement !== null) {
   root.render(
     <React.StrictMode>
       <BrowserRouter>
-      <ChakraProvider>
-        <App />
-      </ChakraProvider>
+        <ChakraProvider>
+          <App />
+        </ChakraProvider>
       </BrowserRouter>
     </React.StrictMode>
   )

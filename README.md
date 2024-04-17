@@ -1,7 +1,6 @@
 # Blueprint Admin
 ## Overview
 React Web Application that will serve as an admin dashboard to manage members, and permission of Stevens Blueprint. The main purpose of the web application is to provide a tool for the Blueprint eboard to manage Blueprint members and display statistics about them. Stevens Blueprint uses Authelia as SSO, therefore to log in members should be signed in. 
-
 ## Features
 The Blueprint Admin will provide means for Blueprint members to do the following:
 
