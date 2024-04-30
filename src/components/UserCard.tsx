@@ -18,8 +18,6 @@ import {
   EditablePreview,
 } from "@chakra-ui/react";
 
-import { setTokenSourceMapRange } from "typescript";
-
 interface UserCardProps {
   buttonText: string;
   userName: string;
@@ -51,7 +49,7 @@ function UserCard({
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{userName} Information</ModalHeader>
+          <ModalHeader>{userName}'s Information</ModalHeader>
           <ModalCloseButton />
 
           <ModalBody>
