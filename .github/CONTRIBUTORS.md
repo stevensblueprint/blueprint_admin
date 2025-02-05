@@ -1,3 +1,3 @@
 Contributors:
-- Miguel Merlin
 - Maya Patel
+- Miguel Merlin
