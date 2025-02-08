@@ -1,4 +1,4 @@
 Contributors:
 - Miguel Merlin
 - Maya Patel
-- Alexis Emerson
+- Alexis E
