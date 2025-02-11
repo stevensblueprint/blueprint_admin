@@ -1,5 +1,5 @@
 import { Center, Container, HStack, Spinner, Text, Box } from "@chakra-ui/react";
-import { Table } from "@chakra-ui/react"
+import { Table } from "@chakra-ui/react";
 import Sidebar from "../components/Sidebar";
 import React, { useEffect, useState } from "react";
 import { Member } from "../types/member";
