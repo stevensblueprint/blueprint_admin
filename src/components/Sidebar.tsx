@@ -9,6 +9,9 @@ import {
   Image,
   Text,
   Link as ChakraLink,
+  Icon,
+  ListIcon,
+  IconButton,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import HomeIcon from "./icons/HomeIcon";
@@ -97,6 +100,24 @@ function Sidebar(): JSX.Element {
                 >
                   <Text alignSelf="flex-end">Blog</Text>
                 </Button>
+              </ChakraLink>
+              <ChakraLink
+              as={ReactRouterLink}
+              to="/events"
+              _hover={{ textDecoration: "none" }}
+              >
+               <Button
+               leftIcon={<ExpandIcon />}
+               colorScheme="whiteAlpha"
+               width="100%"
+               padding="8px"
+               justifyContent="start"
+               backgroundColor="transparent"
+               variant="solid"
+               display="flex"
+               >
+                <Text alignSelf="flex-end">Events</Text>
+               </Button>
               </ChakraLink>
             </VStack>
           </Box>
