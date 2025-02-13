@@ -1,19 +1,18 @@
-import { Table, Thead, Tbody, Tr, Th, TableContainer } from "@chakra-ui/react";
+import { Table } from "@chakra-ui/react";
 import { Member } from "../types/member";
 
 function TableDashboard({ members }: { members: Member[] }): JSX.Element {
   return (
-    <TableContainer>
-      <Table variant="simple" size="md">
-        <Thead>
-          <Tr>
-            <Th>Name</Th>
-            <Th>Email</Th>
-            <Th>Title</Th>
-            <Th>Status</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
+    <Table.Root size="md">
+        <Table.Header>
+          <Table.Row>
+            <Table.ColumnHeader>Name</Table.ColumnHeader>
+            <Table.ColumnHeader>Email</Table.ColumnHeader>
+            <Table.ColumnHeader>Title</Table.ColumnHeader>
+            <Table.ColumnHeader>Status</Table.ColumnHeader>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
           {members
             .sort((a: Member, b: Member) => {
               return a.name.localeCompare(b.name);
@@ -23,17 +22,16 @@ function TableDashboard({ members }: { members: Member[] }): JSX.Element {
               (
                 { name, email, isActive }: Member, // Add type annotation for User
               ) => (
-                <Tr key={email}>
-                  <Th>{name}</Th>
-                  <Th>{email}</Th>
-                  <Th></Th>
-                  <Th>{isActive ? "Active" : "Inactive"}</Th>
-                </Tr>
+                <Table.Row key={email}>
+                  <Table.Cell>{name}</Table.Cell>
+                  <Table.Cell>{email}</Table.Cell>
+                  <Table.Cell></Table.Cell>
+                  <Table.Cell>{isActive ? "Active" : "Inactive"}</Table.Cell>
+                </Table.Row>
               ),
             )}
-        </Tbody>
-      </Table>
-    </TableContainer>
+        </Table.Body>
+    </Table.Root>
   );
 }
 

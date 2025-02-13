@@ -25,7 +25,7 @@ function HomePage(): JSX.Element {
   }, []);
 
   return (
-    <HStack height="100vh" spacing="0">
+    <HStack height="100vh">
       <Sidebar />
       <Container>
         {isLoading ? (
