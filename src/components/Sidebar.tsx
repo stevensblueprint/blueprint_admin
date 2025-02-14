@@ -98,6 +98,24 @@ function Sidebar(): JSX.Element {
                   <Text alignSelf="flex-end">Blog</Text>
                 </Button>
               </ChakraLink>
+                <ChakraLink
+                as={ReactRouterLink}
+                to="/Members"
+                _hover={{textDecoration:"none"}}
+                >
+                <Button
+                    leftIcon={<BlogIcon />}
+                    colorScheme="whiteAlpha"
+                    width="100%"
+                    padding="8px"
+                    justifyContent="start"
+                    backgroundColor="transparent"
+                    variant="solid"
+                    display="flex"
+                >
+                  <Text alignSelf = "flex-end">Members</Text>
+                </Button>
+                </ChakraLink>
             </VStack>
           </Box>
         </Flex>
