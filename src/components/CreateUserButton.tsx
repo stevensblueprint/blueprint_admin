@@ -1,19 +1,23 @@
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   Button,
-  FormControl,
-  FormLabel,
+  // FormControl,
+  // FormLabel,
+  Fieldset,
   Input,
   useDisclosure,
-  Alert,
-  AlertIcon,
+  Alert
 } from "@chakra-ui/react";
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot,
+  DialogTitle,
+  DialogTrigger,
+} from "../components/ui/dialog"
 import React, { useState } from "react";
 
 function CreateUserButton({
@@ -22,7 +26,7 @@ function CreateUserButton({
   displaySuccess: boolean;
   setDisplaySuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }): JSX.Element {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
   const [formData, setFormData] = useState({ email: "", roles: "" });
@@ -64,26 +68,25 @@ function CreateUserButton({
         Add Users
       </Button>
 
-      <Modal
+      <DialogRoot
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
-        isOpen={isOpen}
+        isOpen={open}
         onClose={onClose}
         isCentered
       >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Add User</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
+        <DialogBackdrop />
+        <DialogBody>
+          <DialogHeader>Add User</DialogHeader>
+          <DialogCloseTrigger />
+          <DialogBody pb={6}>
             {displayError && (
-              <Alert status="error">
-                <AlertIcon />
+              <Alert.Root status="error">
                 Request failed
-              </Alert>
+              </Alert.Root>
             )}
-            <FormControl>
-              <FormLabel>Email</FormLabel>
+            <Fieldset.Root>
+              <Fieldset.Legend>Email</Fieldset.Legend>
               <Input
                 name="email"
                 placeholder="Email"
@@ -91,27 +94,27 @@ function CreateUserButton({
                 onChange={handleChange}
                 value={formData.email}
               />
-            </FormControl>
+            </Fieldset.Root>
 
-            <FormControl mt={4}>
-              <FormLabel>Roles</FormLabel>
+            <Fieldset.Root mt={4}>
+              <Fieldset.Legend>Roles</Fieldset.Legend>
               <Input
                 name="roles"
                 placeholder="Roles"
                 onChange={handleChange}
                 value={formData.roles}
               />
-            </FormControl>
-          </ModalBody>
+            </Fieldset.Root>
+          </DialogBody>
 
-          <ModalFooter>
+          <DialogFooter>
             <Button colorScheme="blue" mr={3} onClick={handleSubmit}>
               Accept
             </Button>
             <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+          </DialogFooter>
+        </DialogBody>
+      </DialogRoot>
     </>
   );
 }

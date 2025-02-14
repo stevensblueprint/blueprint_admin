@@ -43,14 +43,13 @@ function Sidebar(): JSX.Element {
                 minWidth="80px"
               ></Image>
             </HStack> */}
-            <VStack paddingX="8px" spacing="15px" align="left">
+            <VStack paddingX="8px" align="left">
               <ChakraLink
                 as={ReactRouterLink}
-                to="/"
+                href="/"
                 _hover={{ textDecoration: "none" }}
               >
                 <Button
-                  leftIcon={<HomeIcon />}
                   colorScheme="whiteAlpha"
                   width="100%"
                   padding="8px"
@@ -59,16 +58,15 @@ function Sidebar(): JSX.Element {
                   variant="solid"
                   display="flex"
                 >
-                  <Text alignSelf="flex-end">Home</Text>
+                  <Text alignSelf="flex-end"><HomeIcon />Home</Text>
                 </Button>
               </ChakraLink>
               <ChakraLink
                 as={ReactRouterLink}
-                to="/dashboard"
+                href="/dashboard"
                 _hover={{ textDecoration: "none" }}
               >
                 <Button
-                  leftIcon={<DashboardIcon />}
                   colorScheme="whiteAlpha"
                   width="100%"
                   padding="8px"
@@ -77,16 +75,15 @@ function Sidebar(): JSX.Element {
                   variant="solid"
                   display="flex"
                 >
-                  <Text alignSelf="flex-end">Dashboard</Text>
+                  <Text alignSelf="flex-end"><DashboardIcon />Dashboard</Text>
                 </Button>
               </ChakraLink>
               <ChakraLink
                 as={ReactRouterLink}
-                to="/blog"
+                href="/blog"
                 _hover={{ textDecoration: "none" }}
               >
                 <Button
-                  leftIcon={<BlogIcon />}
                   colorScheme="whiteAlpha"
                   width="100%"
                   padding="8px"
@@ -95,7 +92,7 @@ function Sidebar(): JSX.Element {
                   variant="solid"
                   display="flex"
                 >
-                  <Text alignSelf="flex-end">Blog</Text>
+                  <Text alignSelf="flex-end"><BlogIcon /> Blog</Text>
                 </Button>
               </ChakraLink>
             </VStack>
@@ -106,13 +103,12 @@ function Sidebar(): JSX.Element {
         onClick={() => {
           setHidden(!hidden);
         }}
-        leftIcon={<ExpandIcon />}
         colorScheme="none"
         backgroundColor="transparent"
         color="black"
         position="absolute"
         right="-50px"
-      ></Button>
+      ><ExpandIcon /></Button>
     </Flex>
   );
 }
