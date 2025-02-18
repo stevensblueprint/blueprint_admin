@@ -10,7 +10,6 @@ import {
   Text,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { motion } from "framer-motion";
 import HomeIcon from "./icons/HomeIcon";
 import DashboardIcon from "./icons/Dashboard";
 import BlogIcon from "./icons/BlogIcon";
@@ -21,11 +20,11 @@ function Sidebar(): JSX.Element {
 
   return (
     <Flex width="fit-content" height="100%" position="relative">
-      <motion.nav
+      {/* <motion.nav
         initial={hidden}
         animate={{ width: hidden ? 0 : "300px" }}
         transition={{ ease: "easeOut", duration: 0.3 }}
-      >
+      > */}
         <Flex
           height="100%"
           backgroundColor="blue.500"
@@ -33,6 +32,7 @@ function Sidebar(): JSX.Element {
           justifyContent="space-between"
           color="white"
           overflow="hidden"
+          paddingX="14"
         >
           <Box>
             {/* <HStack padding="16px" columnGap="20px">
@@ -58,7 +58,8 @@ function Sidebar(): JSX.Element {
                   variant="solid"
                   display="flex"
                 >
-                  <Text alignSelf="flex-end"><HomeIcon />Home</Text>
+                <Text alignSelf="flex-end">Home</Text> 
+                {/* <HomeIcon /> */}
                 </Button>
               </ChakraLink>
               <ChakraLink
@@ -98,7 +99,7 @@ function Sidebar(): JSX.Element {
             </VStack>
           </Box>
         </Flex>
-      </motion.nav>
+      {/* </motion.nav> */}
       <Button
         onClick={() => {
           setHidden(!hidden);
