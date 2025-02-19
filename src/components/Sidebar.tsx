@@ -46,9 +46,14 @@ function Sidebar(): JSX.Element {
             <VStack paddingX="8px" align="left">
               <ChakraLink
                 as={ReactRouterLink}
+                // asChild
                 href="/"
                 _hover={{ textDecoration: "none" }}
               >
+                {/* <ReactRouterLink to="/">
+                  
+                </ReactRouterLink> */} 
+                {/* Try Linkbox */}
                 <Button
                   colorScheme="whiteAlpha"
                   width="100%"
@@ -58,8 +63,7 @@ function Sidebar(): JSX.Element {
                   variant="solid"
                   display="flex"
                 >
-                <Text alignSelf="flex-end">Home</Text> 
-                {/* <HomeIcon /> */}
+                 <HomeIcon /><Text alignSelf="flex-end">Home</Text> 
                 </Button>
               </ChakraLink>
               <ChakraLink
@@ -76,7 +80,7 @@ function Sidebar(): JSX.Element {
                   variant="solid"
                   display="flex"
                 >
-                  <Text alignSelf="flex-end"><DashboardIcon />Dashboard</Text>
+                  <DashboardIcon /><Text alignSelf="flex-end"> Dashboard</Text>
                 </Button>
               </ChakraLink>
               <ChakraLink
@@ -93,7 +97,7 @@ function Sidebar(): JSX.Element {
                   variant="solid"
                   display="flex"
                 >
-                  <Text alignSelf="flex-end"><BlogIcon /> Blog</Text>
+                  <BlogIcon /><Text alignSelf="flex-end"> Blog</Text>
                 </Button>
               </ChakraLink>
             </VStack>
