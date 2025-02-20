@@ -82,6 +82,24 @@ function Sidebar(): JSX.Element {
               </ChakraLink>
               <ChakraLink
                 as={ReactRouterLink}
+                to="/events"
+                _hover={{ textDecoration: "none" }}
+              >
+                <Button
+                  leftIcon={<DashboardIcon />}
+                  colorScheme="whiteAlpha"
+                  width="100%"
+                  padding="8px"
+                  justifyContent="start"
+                  backgroundColor="transparent"
+                  variant="solid"
+                  display="flex"
+                >
+                  <Text alignSelf="flex-end">Events</Text>
+                </Button>
+              </ChakraLink>
+              <ChakraLink
+                as={ReactRouterLink}
                 to="/blog"
                 _hover={{ textDecoration: "none" }}
               >
