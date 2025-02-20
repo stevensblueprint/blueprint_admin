@@ -16,10 +16,16 @@ import BlogIcon from "./icons/BlogIcon";
 import ExpandIcon from "./icons/ExpandIcon";
 
 function Sidebar(): JSX.Element {
-  const [hidden, setHidden] = useState(false);
+  // const [hidden, setHidden] = useState(false);
+  let [hidden, setHidden] = useState("open");
 
   return (
-    <Flex width="fit-content" height="100%" position="relative">
+    <Flex height="100%" position="relative" //width="fit-content"
+    data-state={hidden} 
+    _open={{animation: "0.3s slide-from-left-full"}} 
+    _closed={{animation: "0.3s slide-from-right-full"}}
+    width={hidden=="closed" ? "0px" : "300px"}
+    >
       {/* <motion.nav
         initial={hidden}
         animate={{ width: hidden ? 0 : "300px" }}
@@ -32,7 +38,8 @@ function Sidebar(): JSX.Element {
           justifyContent="space-between"
           color="white"
           overflow="hidden"
-          paddingX="14"
+          // paddingX="14"
+          paddingX={hidden=="closed" ? "0" : "14"}
         >
           <Box>
             {/* <HStack padding="16px" columnGap="20px">
@@ -106,7 +113,8 @@ function Sidebar(): JSX.Element {
       {/* </motion.nav> */}
       <Button
         onClick={() => {
-          setHidden(!hidden);
+          // setHidden(!hidden);
+          setHidden(hidden=="open" ? hidden="closed" : hidden="open")
         }}
         colorScheme="none"
         backgroundColor="transparent"
