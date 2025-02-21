@@ -21,7 +21,7 @@ function Sidebar(): JSX.Element {
   let [hidden, setHidden] = useState("open");
 
   return (
-    <Flex height="100%" position="relative" // width="fit-content"
+    <Flex height="100%" position="relative"
     data-state={hidden} 
     _open={{animation: "0.3s slide-from-left-full"}} //  
     _closed={{animation: "0.3s slide-from-right-full"}} //  
