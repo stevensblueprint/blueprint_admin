@@ -15,6 +15,7 @@ import HomeIcon from "./icons/HomeIcon";
 import DashboardIcon from "./icons/Dashboard";
 import BlogIcon from "./icons/BlogIcon";
 import ExpandIcon from "./icons/ExpandIcon";
+import MembersIcon from "./icons/MembersIcon";
 
 function Sidebar(): JSX.Element {
   const [hidden, setHidden] = useState(false);
@@ -104,7 +105,7 @@ function Sidebar(): JSX.Element {
                 _hover={{textDecoration:"none"}}
                 >
                 <Button
-                    leftIcon={<BlogIcon />}
+                    leftIcon={<MembersIcon />}
                     colorScheme="whiteAlpha"
                     width="100%"
                     padding="8px"
