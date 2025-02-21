@@ -10,7 +10,7 @@ import {
   Text,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { LinkBox, LinkOverlay } from "@chakra-ui/react"
+import { Show } from "@chakra-ui/react"
 import HomeIcon from "./icons/HomeIcon";
 import DashboardIcon from "./icons/Dashboard";
 import BlogIcon from "./icons/BlogIcon";
@@ -21,12 +21,13 @@ function Sidebar(): JSX.Element {
   let [hidden, setHidden] = useState("open");
 
   return (
-    <Flex height="100%" position="relative" //width="fit-content"
+    <Flex height="100%" position="relative" // width="fit-content"
     data-state={hidden} 
-    _open={{animation: "0.3s slide-from-left-full"}} 
-    _closed={{animation: "0.3s slide-from-right-full"}}
-    width={hidden=="closed" ? "0px" : "300px"}
+    _open={{animation: "0.3s slide-from-left-full"}} //  
+    _closed={{animation: "0.3s slide-from-right-full"}} //  
+    width={hidden=="closed" ? "0px" : "fit-content"}
     >
+      {/* <Show when={hidden=="open"}> */}
       {/* <motion.nav
         initial={hidden}
         animate={{ width: hidden ? 0 : "300px" }}
@@ -109,6 +110,7 @@ function Sidebar(): JSX.Element {
             </VStack>
           </Box>
         </Flex>
+        {/* <Show /> */}
       {/* </motion.nav> */}
       <Button
         onClick={() => {
@@ -121,7 +123,9 @@ function Sidebar(): JSX.Element {
         position="absolute"
         right="-50px"
       ><ExpandIcon /></Button>
+      
     </Flex>
+    
   );
 }
 
