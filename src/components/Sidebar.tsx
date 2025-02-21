@@ -10,6 +10,7 @@ import {
   Text,
   Link as ChakraLink,
 } from "@chakra-ui/react";
+import { LinkBox, LinkOverlay } from "@chakra-ui/react"
 import HomeIcon from "./icons/HomeIcon";
 import DashboardIcon from "./icons/Dashboard";
 import BlogIcon from "./icons/BlogIcon";
@@ -52,15 +53,10 @@ function Sidebar(): JSX.Element {
             </HStack> */}
             <VStack paddingX="8px" align="left">
               <ChakraLink
-                as={ReactRouterLink}
-                // asChild
-                href="/"
+                asChild
                 _hover={{ textDecoration: "none" }}
               >
-                {/* <ReactRouterLink to="/">
-                  
-                </ReactRouterLink> */} 
-                {/* Try Linkbox */}
+                <ReactRouterLink to="/">
                 <Button
                   colorScheme="whiteAlpha"
                   width="100%"
@@ -72,12 +68,13 @@ function Sidebar(): JSX.Element {
                 >
                  <HomeIcon /><Text alignSelf="flex-end">Home</Text> 
                 </Button>
+                </ReactRouterLink>
               </ChakraLink>
               <ChakraLink
-                as={ReactRouterLink}
-                href="/dashboard"
+                asChild
                 _hover={{ textDecoration: "none" }}
               >
+                <ReactRouterLink to="/dashboard">
                 <Button
                   colorScheme="whiteAlpha"
                   width="100%"
@@ -89,12 +86,13 @@ function Sidebar(): JSX.Element {
                 >
                   <DashboardIcon /><Text alignSelf="flex-end"> Dashboard</Text>
                 </Button>
+                </ReactRouterLink>
               </ChakraLink>
               <ChakraLink
-                as={ReactRouterLink}
-                href="/blog"
+                asChild
                 _hover={{ textDecoration: "none" }}
               >
+                <ReactRouterLink to="/blog">
                 <Button
                   colorScheme="whiteAlpha"
                   width="100%"
@@ -106,6 +104,7 @@ function Sidebar(): JSX.Element {
                 >
                   <BlogIcon /><Text alignSelf="flex-end"> Blog</Text>
                 </Button>
+                </ReactRouterLink>
               </ChakraLink>
             </VStack>
           </Box>
