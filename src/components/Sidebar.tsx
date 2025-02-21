@@ -27,12 +27,6 @@ function Sidebar(): JSX.Element {
     _closed={{animation: "0.3s slide-from-right-full"}} //  
     width={hidden=="closed" ? "0px" : "fit-content"}
     >
-      {/* <Show when={hidden=="open"}> */}
-      {/* <motion.nav
-        initial={hidden}
-        animate={{ width: hidden ? 0 : "300px" }}
-        transition={{ ease: "easeOut", duration: 0.3 }}
-      > */}
         <Flex
           height="100%"
           backgroundColor="blue.500"
@@ -40,7 +34,6 @@ function Sidebar(): JSX.Element {
           justifyContent="space-between"
           color="white"
           overflow="hidden"
-          // paddingX="14"
           paddingX={hidden=="closed" ? "0" : "14"}
         >
           <Box>
@@ -110,11 +103,8 @@ function Sidebar(): JSX.Element {
             </VStack>
           </Box>
         </Flex>
-        {/* <Show /> */}
-      {/* </motion.nav> */}
       <Button
         onClick={() => {
-          // setHidden(!hidden);
           setHidden(hidden=="open" ? hidden="closed" : hidden="open")
         }}
         colorScheme="none"
