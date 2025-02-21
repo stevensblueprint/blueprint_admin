@@ -1,6 +1,6 @@
 import { Icon } from "@chakra-ui/react";
 
-function BlogIcon(): JSX.Element {
+function MembersIcon(): JSX.Element {
   return (
     <Icon
       fill="none"
@@ -26,4 +26,4 @@ function BlogIcon(): JSX.Element {
   );
 }
 
-export default BlogIcon;
+export default MembersIcon;
