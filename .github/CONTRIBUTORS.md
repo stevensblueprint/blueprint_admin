@@ -1,4 +1,5 @@
 Contributors:
-- Miguel Merlin
 - Maya Patel
+- Miguel Merlin 
+- Derrick Sual
 - Christopher Engelbart
