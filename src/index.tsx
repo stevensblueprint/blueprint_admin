@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./app/App";
-import { Provider } from "./components/ui/provider"
+import { Provider } from "./components/ui/provider";
 import { BrowserRouter } from "react-router-dom";
 
 const rootElement = document.getElementById("root");
@@ -11,9 +11,9 @@ if (rootElement !== null) {
   root.render(
     <React.StrictMode>
       <BrowserRouter>
-        <Provider >
+        <Provider defaultTheme="light">
           <App />
-        </Provider >
+        </Provider>
       </BrowserRouter>
     </React.StrictMode>,
   );
