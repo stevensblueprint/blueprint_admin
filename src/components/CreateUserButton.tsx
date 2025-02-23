@@ -3,7 +3,7 @@ import {
   Fieldset,
   Input,
   useDisclosure,
-  Alert
+  Alert,
 } from "@chakra-ui/react";
 import {
   DialogBackdrop,
@@ -15,7 +15,7 @@ import {
   DialogRoot,
   DialogTitle,
   DialogTrigger,
-} from "../components/ui/dialog"
+} from "../components/ui/dialog";
 import React, { useState } from "react";
 
 function CreateUserButton({
@@ -79,9 +79,7 @@ function CreateUserButton({
           <DialogCloseTrigger />
           <DialogBody pb={6}>
             {displayError && (
-              <Alert.Root status="error">
-                Request failed
-              </Alert.Root>
+              <Alert.Root status="error">Request failed</Alert.Root>
             )}
             <Fieldset.Root>
               <Fieldset.Legend>Email</Fieldset.Legend>

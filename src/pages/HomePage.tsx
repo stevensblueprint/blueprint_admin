@@ -1,4 +1,11 @@
-import { Center, Container, HStack, Spinner, Text, Box } from "@chakra-ui/react";
+import {
+  Center,
+  Container,
+  HStack,
+  Spinner,
+  Text,
+  Box,
+} from "@chakra-ui/react";
 import TableDashboard from "../components/TableDashboard";
 import Sidebar from "../components/Sidebar";
 import React, { useEffect, useState } from "react";
