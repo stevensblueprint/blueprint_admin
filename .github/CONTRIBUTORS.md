@@ -1,5 +1,6 @@
 Contributors:
 - Miguel Merlin
+- Alexis E
 - Shiven Pandya
 - Maya Patel 
 - Derrick Sual
