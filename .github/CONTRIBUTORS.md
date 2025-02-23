@@ -1,5 +1,6 @@
 Contributors:
-- Maya Patel
-- Miguel Merlin 
+- Miguel Merlin
+- Maya Patel 
 - Derrick Sual
 - Christopher Engelbart
+- Roland Aranas
