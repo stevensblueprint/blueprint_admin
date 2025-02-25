@@ -8,6 +8,7 @@ function MembersIcon(): JSX.Element {
       strokeWidth="2.15"
       stroke="currentColor"
     >
+    <svg>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -22,6 +23,7 @@ function MembersIcon(): JSX.Element {
 		s-3.953,1.771-3.953,3.954C25.802,13.992,27.574,15.762,29.755,15.762z M5.938,15.762c2.183,0,3.953-1.77,3.953-3.954
 		c0-2.183-1.771-3.954-3.953-3.954c-2.184,0-3.954,1.771-3.954,3.954C1.984,13.992,3.755,15.762,5.938,15.762z"
       />
+    </svg>
     </Icon>
   );
 }

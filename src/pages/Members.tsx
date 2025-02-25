@@ -1,45 +1,49 @@
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Button, ButtonGroup, DialogActionTrigger } from "@chakra-ui/react";
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-  } from '@chakra-ui/react'
+    DialogBody,
+    DialogCloseTrigger,
+    DialogContent,
+    DialogFooter,
+    DialogHeader,
+    DialogRoot,
+    DialogTitle,
+    DialogTrigger,
+  } from "../components/ui/dialog"
 import { useDisclosure } from '@chakra-ui/react'
 import { Input } from '@chakra-ui/react'
 
 const members_page = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
     
     return(
         <div>
-            <Button onClick={onOpen}>Create new user</Button>
-            <Modal isOpen={ isOpen } size={'xl'} onClose={onClose}>
-                <ModalOverlay/>
-                <ModalContent>
-                    <ModalHeader>Create New User</ModalHeader>
-                    <ModalCloseButton/>
-                    <ModalBody>
-                        Enter the name of new member:
-                        <Input placeholder='Enter Name'></Input>
-                        Enter the email address of new member:
-                        <Input placeholder='Enter email'></Input>
-                        Enter the role of the new member:
-                        <Input placeholder='Enter role'></Input>
-                        Enter the GitHub username of the new member:
-                        <Input placeholder='Enter username'></Input>
-                        Enter the class standing of the new member (e.g., Freshman, Sophomore, Junior or Senior):
-                        <Input placeholder='Enter class standing'></Input>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button onClick={onClose}>Close</Button>
-                        <Button>Submit</Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
+            <DialogRoot>
+                <DialogTrigger>
+                    <Button variant="subtle" size="md">Add New Member</Button>
+                </DialogTrigger>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle fontSize="25px">Add New Member</DialogTitle>
+                    </DialogHeader>
+                    <DialogBody fontSize="15px">
+                        <p>Enter the name of the new member:</p>
+                        <Input placeholder="Enter name" variant="subtle"></Input>
+                        <p>Enter the email address of new member:</p>
+                        <Input placeholder="Enter email" variant="subtle"></Input>
+                        <p>Enter the role of the new member:</p>
+                        <Input placeholder="Enter role" variant="subtle"></Input>
+                        <p>Enter the GitHub username of the new member:</p>
+                        <Input placeholder="Enter username" variant="subtle"></Input>
+                        <p>Enter the class standing of the new member (e.g., Freshman, Sophomore, Junior or Senior):</p>
+                        <Input placeholder="Enter class standing" variant="subtle"></Input>
+                    </DialogBody>
+                    <DialogFooter>
+                        <DialogActionTrigger asChild>
+                            <Button variant="outline">Close</Button>
+                        </DialogActionTrigger>
+                        <Button variant="solid" size="md" ml="auto">Submit</Button>
+                    </DialogFooter>
+                </DialogContent>
+            </DialogRoot>
         </div>
     )
 }
