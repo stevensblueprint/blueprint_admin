@@ -1,4 +1,11 @@
-import { Center, Container, HStack, Spinner, Text } from "@chakra-ui/react";
+import {
+  Center,
+  Container,
+  HStack,
+  Spinner,
+  Text,
+  Box,
+} from "@chakra-ui/react";
 import TableDashboard from "../components/TableDashboard";
 import Sidebar from "../components/Sidebar";
 import React, { useEffect, useState } from "react";
@@ -25,7 +32,7 @@ function HomePage(): JSX.Element {
   }, []);
 
   return (
-    <HStack height="100vh" spacing="0">
+    <HStack height="100vh">
       <Sidebar />
       <Container>
         {isLoading ? (

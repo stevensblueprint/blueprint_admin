@@ -10,32 +10,35 @@ import {
   Text,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { motion } from "framer-motion";
 import HomeIcon from "./icons/HomeIcon";
 import DashboardIcon from "./icons/Dashboard";
 import BlogIcon from "./icons/BlogIcon";
 import ExpandIcon from "./icons/ExpandIcon";
 
 function Sidebar(): JSX.Element {
-  const [hidden, setHidden] = useState(false);
+  // const [hidden, setHidden] = useState(false);
+  let [hidden, setHidden] = useState("open");
 
   return (
-    <Flex width="fit-content" height="100%" position="relative">
-      <motion.nav
-        initial={hidden}
-        animate={{ width: hidden ? 0 : "300px" }}
-        transition={{ ease: "easeOut", duration: 0.3 }}
+    <Flex
+      height="100%"
+      position="relative"
+      data-state={hidden}
+      _open={{ animation: "0.3s slide-from-left-full" }} //
+      _closed={{ animation: "0.3s slide-from-right-full" }} //
+      width={hidden == "closed" ? "0px" : "fit-content"}
+    >
+      <Flex
+        height="100%"
+        backgroundColor="blue.500"
+        direction="column"
+        justifyContent="space-between"
+        color="white"
+        overflow="hidden"
+        paddingX={hidden == "closed" ? "0" : "14"}
       >
-        <Flex
-          height="100%"
-          backgroundColor="blue.500"
-          direction="column"
-          justifyContent="space-between"
-          color="white"
-          overflow="hidden"
-        >
-          <Box>
-            {/* <HStack padding="16px" columnGap="20px">
+        <Box>
+          {/* <HStack padding="16px" columnGap="20px">
               <Image
                 src={Logo}
                 alt="Blueprint Logo"
@@ -43,14 +46,10 @@ function Sidebar(): JSX.Element {
                 minWidth="80px"
               ></Image>
             </HStack> */}
-            <VStack paddingX="8px" spacing="15px" align="left">
-              <ChakraLink
-                as={ReactRouterLink}
-                to="/"
-                _hover={{ textDecoration: "none" }}
-              >
+          <VStack paddingX="8px" align="left">
+            <ChakraLink asChild _hover={{ textDecoration: "none" }}>
+              <ReactRouterLink to="/">
                 <Button
-                  leftIcon={<HomeIcon />}
                   colorScheme="whiteAlpha"
                   width="100%"
                   padding="8px"
@@ -59,16 +58,14 @@ function Sidebar(): JSX.Element {
                   variant="solid"
                   display="flex"
                 >
+                  <HomeIcon />
                   <Text alignSelf="flex-end">Home</Text>
                 </Button>
-              </ChakraLink>
-              <ChakraLink
-                as={ReactRouterLink}
-                to="/dashboard"
-                _hover={{ textDecoration: "none" }}
-              >
+              </ReactRouterLink>
+            </ChakraLink>
+            <ChakraLink asChild _hover={{ textDecoration: "none" }}>
+              <ReactRouterLink to="/dashboard">
                 <Button
-                  leftIcon={<DashboardIcon />}
                   colorScheme="whiteAlpha"
                   width="100%"
                   padding="8px"
@@ -77,16 +74,14 @@ function Sidebar(): JSX.Element {
                   variant="solid"
                   display="flex"
                 >
-                  <Text alignSelf="flex-end">Dashboard</Text>
+                  <DashboardIcon />
+                  <Text alignSelf="flex-end"> Dashboard</Text>
                 </Button>
-              </ChakraLink>
-              <ChakraLink
-                as={ReactRouterLink}
-                to="/blog"
-                _hover={{ textDecoration: "none" }}
-              >
+              </ReactRouterLink>
+            </ChakraLink>
+            <ChakraLink asChild _hover={{ textDecoration: "none" }}>
+              <ReactRouterLink to="/blog">
                 <Button
-                  leftIcon={<BlogIcon />}
                   colorScheme="whiteAlpha"
                   width="100%"
                   padding="8px"
@@ -95,16 +90,16 @@ function Sidebar(): JSX.Element {
                   variant="solid"
                   display="flex"
                 >
-                  <Text alignSelf="flex-end">Blog</Text>
+                  <BlogIcon />
+                  <Text alignSelf="flex-end"> Blog</Text>
                 </Button>
-              </ChakraLink>
-              <ChakraLink
-                as={ReactRouterLink}
-                to="../attendance"
+              </ReactRouterLink>
+            </ChakraLink>
+            <ChakraLink
                 _hover={{ textDecoration: "none" }}
               >
+                <ReactRouterLink to="../attendance">
                 <Button
-                  leftIcon={<BlogIcon />}
                   colorScheme="whiteAlpha"
                   width="100%"
                   padding="8px"
@@ -113,24 +108,26 @@ function Sidebar(): JSX.Element {
                   variant="solid"
                   display="flex"
                 >
+                  <BlogIcon />
                   <Text alignSelf="flex-end">Attendence</Text>
                 </Button>
-              </ChakraLink>
-            </VStack>
-          </Box>
-        </Flex>
-      </motion.nav>
+                </ReactRouterLink>
+                </ChakraLink>
+          </VStack>
+        </Box>
+      </Flex>
       <Button
         onClick={() => {
-          setHidden(!hidden);
+          setHidden(hidden == "open" ? (hidden = "closed") : (hidden = "open"));
         }}
-        leftIcon={<ExpandIcon />}
         colorScheme="none"
         backgroundColor="transparent"
         color="black"
         position="absolute"
         right="-50px"
-      ></Button>
+      >
+        <ExpandIcon />
+      </Button>
     </Flex>
   );
 }

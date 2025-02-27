@@ -1,10 +1,4 @@
-import {
-  Stat,
-  StatLabel,
-  StatNumber,
-  StatHelpText,
-  StatArrow,
-} from "@chakra-ui/react";
+import { Stat, Show } from "@chakra-ui/react";
 
 interface MetricCardProps {
   label: string;
@@ -20,14 +14,16 @@ function MetricCard({
   change,
 }: MetricCardProps): JSX.Element {
   return (
-    <Stat>
-      <StatLabel>{label}</StatLabel>
-      <StatNumber>{statistic.toLocaleString()}</StatNumber>
-      <StatHelpText>
-        <StatArrow type={change} />
+    <Stat.Root>
+      <Stat.Label>{label}</Stat.Label>
+      <Stat.ValueText>{statistic.toLocaleString()}</Stat.ValueText>
+      <Stat.HelpText>
+        <Show when={change == "increase"} fallback={<Stat.DownIndicator />}>
+          <Stat.UpIndicator />
+        </Show>
         {changePercentage.toLocaleString()}
-      </StatHelpText>
-    </Stat>
+      </Stat.HelpText>
+    </Stat.Root>
   );
 }
 

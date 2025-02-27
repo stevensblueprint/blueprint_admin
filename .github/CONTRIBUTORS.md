@@ -1,4 +1,9 @@
 Contributors:
 - Miguel Merlin
-- Maya Patel
-- Alexis Emerson
+- Alexis E
+- Shiven Pandya
+- Maya Patel 
+- Derrick Sual
+- Ria Konar
+- Christopher Engelbart
+- Roland Aranas

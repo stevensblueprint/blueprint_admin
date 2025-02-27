@@ -8,12 +8,9 @@ function Attendance(): JSX.Element {
     // const [members, setMembers] = React.useState<Member[]>([]);
   
     return (
-      <HStack height="100vh" spacing="0">
+      <HStack height="100vh">
         <Sidebar />
-        <Box background="tomato" width="90%" padding="4" color="white">
-            This is the Box
-        </Box>
-        {/* <Table.Root interactive>
+        <Table.Root interactive>
             <Table.Header>
               <Table.Row>
                 <Table.ColumnHeader>Date</Table.ColumnHeader>
@@ -30,7 +27,7 @@ function Attendance(): JSX.Element {
                 </Table.Row>
               ))}
             </Table.Body>
-          </Table.Root> */}
+          </Table.Root>
       </HStack>
     );
   }
