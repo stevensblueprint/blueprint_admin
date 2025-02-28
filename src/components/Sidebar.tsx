@@ -96,6 +96,22 @@ function Sidebar(): JSX.Element {
                 </Button>
               </ReactRouterLink>
             </ChakraLink>
+            <ChakraLink asChild _hover={{ textDecoration: "none" }}>
+              <ReactRouterLink to="/events">
+                <Button
+                  colorScheme="whiteAlpha"
+                  width="100%"
+                  padding="8px"
+                  justifyContent="start"
+                  backgroundColor="transparent"
+                  variant="solid"
+                  display="flex"
+                >
+                  <DashboardIcon />
+                  <Text alignSelf="flex-end"> Events</Text>
+                </Button>
+              </ReactRouterLink>
+            </ChakraLink>
           </VStack>
         </Box>
       </Flex>
