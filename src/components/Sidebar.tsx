@@ -15,6 +15,7 @@ import HomeIcon from "./icons/HomeIcon";
 import DashboardIcon from "./icons/Dashboard";
 import BlogIcon from "./icons/BlogIcon";
 import ExpandIcon from "./icons/ExpandIcon";
+import EventsIcon from "./icons/EventsIcon";
 
 function Sidebar(): JSX.Element {
   // const [hidden, setHidden] = useState(false);
@@ -107,7 +108,7 @@ function Sidebar(): JSX.Element {
                   variant="solid"
                   display="flex"
                 >
-                  <DashboardIcon />
+                  <EventsIcon />
                   <Text alignSelf="flex-end"> Events</Text>
                 </Button>
               </ReactRouterLink>
