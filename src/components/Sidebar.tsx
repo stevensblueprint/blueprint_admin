@@ -15,6 +15,7 @@ import HomeIcon from "./icons/HomeIcon";
 import DashboardIcon from "./icons/Dashboard";
 import BlogIcon from "./icons/BlogIcon";
 import ExpandIcon from "./icons/ExpandIcon";
+import EventsIcon from "./icons/EventsIcon";
 
 function Sidebar(): JSX.Element {
   // const [hidden, setHidden] = useState(false);
@@ -93,6 +94,22 @@ function Sidebar(): JSX.Element {
                 >
                   <BlogIcon />
                   <Text alignSelf="flex-end"> Blog</Text>
+                </Button>
+              </ReactRouterLink>
+            </ChakraLink>
+            <ChakraLink asChild _hover={{ textDecoration: "none" }}>
+              <ReactRouterLink to="/events">
+                <Button
+                  colorScheme="whiteAlpha"
+                  width="100%"
+                  padding="8px"
+                  justifyContent="start"
+                  backgroundColor="transparent"
+                  variant="solid"
+                  display="flex"
+                >
+                  <EventsIcon />
+                  <Text alignSelf="flex-end"> Events</Text>
                 </Button>
               </ReactRouterLink>
             </ChakraLink>
