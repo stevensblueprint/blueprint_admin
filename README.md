@@ -53,7 +53,7 @@ git commit -m "Commit message"
 Before pushing your changes you have to run the linter. (The linter will
 make sure your code if following standard code styling)
 ```
-npm run lint
+npm run format
 ```
 Push your changes
 ```
