@@ -9,7 +9,7 @@ function App(): JSX.Element {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/members" element={<Members />} />
-        <Route path="/performance" element={<Performance />}/>
+        <Route path="/performance" element={<Performance />} />
       </Routes>
     </div>
   );

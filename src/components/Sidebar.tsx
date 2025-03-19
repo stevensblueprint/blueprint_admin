@@ -114,20 +114,20 @@ function Sidebar(): JSX.Element {
                 </Button>
               </ReactRouterLink>
             </ChakraLink>
-            <ChakraLink asChild _hover={{ textDecoration: "none"}}>
+            <ChakraLink asChild _hover={{ textDecoration: "none" }}>
               <ReactRouterLink to="/performance">
-              <Button
-                colorScheme="whiteAlpha"
-                width="100%"
-                padding="8px"
-                justifyContent="start"
-                backgroundColor="transparent"
-                variant="solid"
-                display="flex"
-              >
-                <PerformanceIcon />
-                <Text alignSelf="flex-end"> Performance</Text>
-              </Button>
+                <Button
+                  colorScheme="whiteAlpha"
+                  width="100%"
+                  padding="8px"
+                  justifyContent="start"
+                  backgroundColor="transparent"
+                  variant="solid"
+                  display="flex"
+                >
+                  <PerformanceIcon />
+                  <Text alignSelf="flex-end"> Performance</Text>
+                </Button>
               </ReactRouterLink>
             </ChakraLink>
           </VStack>
