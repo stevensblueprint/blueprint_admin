@@ -1,8 +1,10 @@
-import { Table } from "@chakra-ui/react";
+import Sidebar from "../components/Sidebar";
+import { HStack, Table } from "@chakra-ui/react";
 
 const performance_page = () => {
   return (
-    <div>
+    <HStack height="100vh">
+      <Sidebar />
       <Table.Root
         key={"outline"}
         size="sm"
@@ -60,7 +62,7 @@ const performance_page = () => {
           </Table.Row>
         ))}
       </Table.Root>
-    </div>
+    </HStack>
   );
 };
 
