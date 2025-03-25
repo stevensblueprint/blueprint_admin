@@ -16,6 +16,7 @@ import DashboardIcon from "./icons/Dashboard";
 import BlogIcon from "./icons/BlogIcon";
 import ExpandIcon from "./icons/ExpandIcon";
 import MembersIcon from "./icons/MembersIcon";
+import PerformanceIcon from "./icons/PerformanceIcon";
 
 function Sidebar(): JSX.Element {
   // const [hidden, setHidden] = useState(false);
@@ -110,6 +111,22 @@ function Sidebar(): JSX.Element {
                 >
                   <MembersIcon />
                   <Text alignSelf="flex-end"> Members</Text>
+                </Button>
+              </ReactRouterLink>
+            </ChakraLink>
+            <ChakraLink asChild _hover={{ textDecoration: "none" }}>
+              <ReactRouterLink to="/performance">
+                <Button
+                  colorScheme="whiteAlpha"
+                  width="100%"
+                  padding="8px"
+                  justifyContent="start"
+                  backgroundColor="transparent"
+                  variant="solid"
+                  display="flex"
+                >
+                  <PerformanceIcon />
+                  <Text alignSelf="flex-end"> Performance</Text>
                 </Button>
               </ReactRouterLink>
             </ChakraLink>
