@@ -5,7 +5,7 @@ import axios, {
 } from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:8080/api/v1",
+  baseURL: process.env.REACT_APP_API_BASE_URL || "",
   headers: {
     Accept: "application/json",
     "Content-type": "application/json",
@@ -16,7 +16,7 @@ const apiClient = axios.create({
 const request = async (
   method: Method,
   url: string,
-  params?: unknown,
+  params?: unknown
 ): Promise<AxiosResponse> => {
   return await apiClient.request({ method, url });
 };

@@ -67,7 +67,12 @@ To run the application
 ```
 npm install
 ```
-2. Run the application
+2. Copy the .env file
+```
+cp .env.example
+```
+
+3. Run the application
 ```
 npm run start
 ```
