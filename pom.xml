@@ -50,9 +50,19 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-cognitoidp</artifactId>
+			<version>1.12.773</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.12.779</version>
+		</dependency>
+		<dependency>
 			<groupId>software.amazon.awssdk</groupId>
-			<artifactId>cognitoidentityprovider</artifactId>
-			<version>2.20.0</version>
+			<artifactId>aws-core</artifactId>
+			<version>2.31.22</version>
 		</dependency>
 
 
