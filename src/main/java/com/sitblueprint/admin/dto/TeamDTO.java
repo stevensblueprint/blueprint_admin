@@ -2,21 +2,16 @@ package com.sitblueprint.admin.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
 
-public class MemberDTO {
+public class TeamDTO {
   @Getter
   @Setter
   @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
   public static class Request {
     private String name;
-    private String email;
-    private String password;
-    private String discordUsername;
-    private String githubUsername;
-    private String dateJoined;
+    private String githubRole;
   }
 
   @Getter
@@ -24,9 +19,6 @@ public class MemberDTO {
   @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
   public static class Response {
     private String name;
-    private String email;
-    private String discordUsername;
-    private String githubUsername;
-    private LocalDate dateJoined;
+    protected String githubTeam;
   }
 }
