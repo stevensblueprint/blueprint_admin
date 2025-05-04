@@ -6,6 +6,7 @@ import com.sitblueprint.admin.dto.MemberDTO.Response;
 import com.sitblueprint.admin.mapper.MemberMapper;
 import com.sitblueprint.admin.model.Member;
 import com.sitblueprint.admin.repository.MemberRepository;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -18,6 +19,7 @@ public class MemberServiceImpl implements MemberService {
 
   private final MemberRepository memberRepository;
   private final MemberMapper mapper;
+  private final GithubService githubService;
 
   @Override
   public List<Response> getAllMembers() {
@@ -31,7 +33,11 @@ public class MemberServiceImpl implements MemberService {
     if (Objects.isNull(member.getId())) {
       member.setId(UUID.randomUUID().toString());
     }
+    if (Objects.isNull(member.getDateJoined())) {
+      member.setDateJoined(LocalDate.now());
+    }
     Member savedMember = memberRepository.save(member);
+    githubService.addMember(savedMember, false);
     return mapper.toResponseDTO(savedMember);
   }
 

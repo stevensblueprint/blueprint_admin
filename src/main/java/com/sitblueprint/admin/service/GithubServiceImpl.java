@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.kohsuke.github.GHOrganization;
+import org.kohsuke.github.GHOrganization.Role;
 import org.kohsuke.github.GHTeam;
+import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GitHub;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +41,9 @@ public class GithubServiceImpl implements GithubService {
   public void addMember(Member member, boolean isAdmin) {
     try {
       GHOrganization org = gitHubClient.getOrganization(githubOrganization);
-
+      GHUser githubMember = gitHubClient.getUser(member.getGithubUsername());
+      Role role = isAdmin ? Role.ADMIN : Role.MEMBER;
+      org.add(githubMember, role);
     } catch (IOException e) {
       log.error("Unable to add member '{}' to team", member.getName());
     }

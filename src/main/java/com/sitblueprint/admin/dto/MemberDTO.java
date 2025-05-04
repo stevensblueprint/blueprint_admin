@@ -12,15 +12,15 @@ public class MemberDTO {
   @Setter
   @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
   public static class Request {
-    @NotBlank
+    @NotBlank(message = "Name cannot be empty")
     private String name;
-    @NotBlank
+    @NotBlank(message = "Email cannot be empty")
     private String email;
-    @NotBlank
+    @NotBlank(message = "Password cannot be empty")
     private String password;
-    @NotBlank
+    @NotBlank(message = "Discord username cannot be empty")
     private String discordUsername;
-    @NotBlank
+    @NotBlank(message = "GitHub username cannot be empty")
     private String githubUsername;
     private LocalDate dateJoined;
   }

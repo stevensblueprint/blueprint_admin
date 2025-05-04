@@ -5,6 +5,7 @@ import com.sitblueprint.admin.service.MemberService;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,7 @@ public class MemberController {
   }
 
   @PostMapping
-  public ResponseEntity<MemberDTO.Response> createMember(@RequestBody MemberDTO.Request member) {
+  public ResponseEntity<MemberDTO.Response> createMember(@Validated @RequestBody MemberDTO.Request member) {
     return ResponseEntity.ok(memberService.createMember(member));
   }
 }
