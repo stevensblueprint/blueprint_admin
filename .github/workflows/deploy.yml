@@ -31,8 +31,13 @@ jobs:
         run: |
           if [ -f package-lock.json ]; then npm ci; else npm i; fi
       - name: Build site
-        # env:
-        #   VITE_APP_URL: ${{ secrets.VITE_APP_URL }}
+        env:
+          VITE_AWS_REGION: ${{ secrets.VITE_AWS_REGION }}
+          VITE_COGNITO_AUTH_DOMAIN: ${{ secrets.VITE_COGNITO_AUTH_DOMAIN }}
+          VITE_COGNITO_REDIRECT_SIGN_IN: ${{ secrets.VITE_COGNITO_REDIRECT_SIGN_IN }}
+          VITE_COGNITO_REDIRECT_SIGN_OUT: ${{ secrets.VITE_COGNITO_REDIRECT_SIGN_OUT }}
+          VITE_COGNITO_USER_POOL_CLIENT_ID: ${{ secrets.VITE_COGNITO_USER_POOL_CLIENT_ID }}
+          VITE_COGNITO_USER_POOL_ID: ${{ secrets.VITE_COGNITO_USER_POOL_ID }}
 
         run: |
           if [ -f package.json ]; then npm run build; else echo "No build step"; fi
