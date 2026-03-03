@@ -5,8 +5,10 @@ import {
   AlertCircle,
   Loader2,
   ExternalLink,
+  Plus,
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
+import { AddTeamModal } from "@/components/AddTeamModal";
 import { getTeams } from "@/services/buddyBotApi";
 import type { BuddyBotTeam } from "@/types/buddyBot";
 
@@ -14,6 +16,7 @@ export default function BuddyBot() {
   const [teams, setTeams] = useState<BuddyBotTeam[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     getTeams()
@@ -26,13 +29,22 @@ export default function BuddyBot() {
     <>
       <Navbar />
       <main className="max-w-5xl mx-auto px-6 py-8">
-        <div className="flex items-center gap-3 mb-8">
-          <div className="p-2 bg-neutral-100 rounded-lg">
-            <Users className="w-6 h-6 text-neutral-700" />
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-neutral-100 rounded-lg">
+              <Users className="w-6 h-6 text-neutral-700" />
+            </div>
+            <h1 className="text-2xl font-semibold text-neutral-900">
+              Coding Buddies
+            </h1>
           </div>
-          <h1 className="text-2xl font-semibold text-neutral-900">
-            Coding Buddies
-          </h1>
+          <button
+            onClick={() => setShowModal(true)}
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-700 rounded-lg transition-colors"
+          >
+            <Plus className="w-4 h-4" />
+            New Team
+          </button>
         </div>
 
         {loading && (
@@ -57,6 +69,16 @@ export default function BuddyBot() {
           <TeamBuddiesTable key={team.name} team={team} />
         ))}
       </main>
+
+      {showModal && (
+        <AddTeamModal
+          onClose={() => setShowModal(false)}
+          onCreated={(team) => {
+            setTeams((prev) => [...prev, team]);
+            setShowModal(false);
+          }}
+        />
+      )}
     </>
   );
 }
