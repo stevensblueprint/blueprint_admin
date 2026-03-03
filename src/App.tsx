@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Home from "./pages/Home";
+import BuddyBot from "./pages/BuddyBot";
 import "./App.css";
 
 export const OAuthCallback = () => {
@@ -30,6 +31,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/buddies"
+            element={
+              <ProtectedRoute>
+                <BuddyBot />
               </ProtectedRoute>
             }
           />
