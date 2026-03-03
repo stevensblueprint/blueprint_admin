@@ -44,7 +44,11 @@ export function AddTeamModal({ onClose, onCreated }: AddTeamModalProps) {
     setRepositories((prev) => prev.filter((_, i) => i !== index));
 
   // Buddy rows
-  const updateBuddyRow = (id: number, field: "github" | "buddy", value: string) =>
+  const updateBuddyRow = (
+    id: number,
+    field: "github" | "buddy",
+    value: string,
+  ) =>
     setBuddyRows((prev) =>
       prev.map((r) => (r.id === id ? { ...r, [field]: value } : r)),
     );
@@ -54,7 +58,11 @@ export function AddTeamModal({ onClose, onCreated }: AddTeamModalProps) {
     setBuddyRows((prev) => prev.filter((r) => r.id !== id));
 
   // Mapping rows
-  const updateMappingRow = (id: number, field: "github" | "discord", value: string) =>
+  const updateMappingRow = (
+    id: number,
+    field: "github" | "discord",
+    value: string,
+  ) =>
     setMappingRows((prev) =>
       prev.map((r) => (r.id === id ? { ...r, [field]: value } : r)),
     );
@@ -93,8 +101,7 @@ export function AddTeamModal({ onClose, onCreated }: AddTeamModalProps) {
       });
       onCreated(team);
     } catch (err: unknown) {
-      const msg =
-        err instanceof Error ? err.message : "Failed to create team";
+      const msg = err instanceof Error ? err.message : "Failed to create team";
       setError(msg);
     } finally {
       setSubmitting(false);
