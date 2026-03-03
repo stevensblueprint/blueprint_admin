@@ -21,8 +21,7 @@ export interface BuddyBotConfig {
 }
 
 // API response shapes
-
-export interface GetConfigResponse extends BuddyBotConfig {}
+export type GetConfigResponse = BuddyBotConfig;
 
 export interface GetSettingsResponse {
   settings: BuddyBotSettings;
@@ -32,7 +31,7 @@ export interface GetTeamsResponse {
   teams: BuddyBotTeam[];
 }
 
-export interface GetTeamResponse extends BuddyBotTeam {}
+export type GetTeamResponse = BuddyBotTeam;
 
 export interface GetRepositoriesResponse {
   repositories: string[];

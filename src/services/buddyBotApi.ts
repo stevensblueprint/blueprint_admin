@@ -37,7 +37,9 @@ export const getConfig = async (): Promise<BuddyBotConfig> => {
   return data;
 };
 
-export const putConfig = async (config: BuddyBotConfig): Promise<BuddyBotConfig> => {
+export const putConfig = async (
+  config: BuddyBotConfig,
+): Promise<BuddyBotConfig> => {
   const { data } = await apiClient.put<GetConfigResponse>("/config", config);
   return data;
 };
@@ -49,8 +51,13 @@ export const getSettings = async (): Promise<BuddyBotSettings> => {
   return data.settings;
 };
 
-export const putSettings = async (settings: BuddyBotSettings): Promise<BuddyBotSettings> => {
-  const { data } = await apiClient.put<GetSettingsResponse>("/config/settings", settings);
+export const putSettings = async (
+  settings: BuddyBotSettings,
+): Promise<BuddyBotSettings> => {
+  const { data } = await apiClient.put<GetSettingsResponse>(
+    "/config/settings",
+    settings,
+  );
   return data.settings;
 };
 
@@ -61,23 +68,37 @@ export const getTeams = async (): Promise<BuddyBotTeam[]> => {
   return data.teams;
 };
 
-export const createTeam = async (team: CreateTeamRequest): Promise<BuddyBotTeam> => {
+export const createTeam = async (
+  team: CreateTeamRequest,
+): Promise<BuddyBotTeam> => {
   const { data } = await apiClient.post<GetTeamResponse>("/config/teams", team);
   return data;
 };
 
 export const getTeam = async (teamName: string): Promise<BuddyBotTeam> => {
-  const { data } = await apiClient.get<GetTeamResponse>(`/config/teams/${teamName}`);
+  const { data } = await apiClient.get<GetTeamResponse>(
+    `/config/teams/${teamName}`,
+  );
   return data;
 };
 
-export const putTeam = async (teamName: string, team: BuddyBotTeam): Promise<BuddyBotTeam> => {
-  const { data } = await apiClient.put<GetTeamResponse>(`/config/teams/${teamName}`, team);
+export const putTeam = async (
+  teamName: string,
+  team: BuddyBotTeam,
+): Promise<BuddyBotTeam> => {
+  const { data } = await apiClient.put<GetTeamResponse>(
+    `/config/teams/${teamName}`,
+    team,
+  );
   return data;
 };
 
-export const deleteTeam = async (teamName: string): Promise<DeleteTeamResponse> => {
-  const { data } = await apiClient.delete<DeleteTeamResponse>(`/config/teams/${teamName}`);
+export const deleteTeam = async (
+  teamName: string,
+): Promise<DeleteTeamResponse> => {
+  const { data } = await apiClient.delete<DeleteTeamResponse>(
+    `/config/teams/${teamName}`,
+  );
   return data;
 };
 
@@ -90,7 +111,10 @@ export const getRepositories = async (teamName: string): Promise<string[]> => {
   return data.repositories;
 };
 
-export const addRepository = async (teamName: string, repoName: string): Promise<string[]> => {
+export const addRepository = async (
+  teamName: string,
+  repoName: string,
+): Promise<string[]> => {
   const { data } = await apiClient.post<CreateRepositoryResponse>(
     `/config/teams/${teamName}/repositories`,
     { name: repoName },
