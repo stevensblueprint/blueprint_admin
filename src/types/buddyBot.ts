@@ -23,6 +23,16 @@ export interface BuddyBotConfig {
 // API response shapes
 export type GetConfigResponse = BuddyBotConfig;
 
+export interface GithubPrResult {
+  action?: string;
+  pr_url?: string;
+  error?: string;
+}
+
+export interface CreateTeamResponse extends BuddyBotTeam {
+  github_prs?: Record<string, GithubPrResult>;
+}
+
 export interface GetSettingsResponse {
   settings: BuddyBotSettings;
 }

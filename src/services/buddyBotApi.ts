@@ -5,6 +5,7 @@ import type {
   BuddyBotSettings,
   BuddyBotTeam,
   CreateTeamRequest,
+  CreateTeamResponse,
   UpdateBuddiesRequest,
   UpdateUsernameMappingsRequest,
   GetConfigResponse,
@@ -70,8 +71,11 @@ export const getTeams = async (): Promise<BuddyBotTeam[]> => {
 
 export const createTeam = async (
   team: CreateTeamRequest,
-): Promise<BuddyBotTeam> => {
-  const { data } = await apiClient.post<GetTeamResponse>("/config/teams", team);
+): Promise<CreateTeamResponse> => {
+  const { data } = await apiClient.post<CreateTeamResponse>(
+    "/config/teams",
+    team,
+  );
   return data;
 };
 

@@ -85,8 +85,6 @@ export default function BuddyBot() {
 
 function TeamBuddiesTable({ team }: { team: BuddyBotTeam }) {
   const buddyEntries = Object.entries(team.buddies ?? {});
-
-  // Logic to get the first repo link
   const firstRepo = team.repositories?.[0];
   const repoName = typeof firstRepo === "string" ? firstRepo : firstRepo?.name;
   const teamRepoUrl = repoName
