@@ -6,10 +6,14 @@ import {
   Loader2,
   ExternalLink,
   Plus,
+  Trash2,
+  Pencil,
+  X,
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { AddTeamModal } from "@/components/AddTeamModal";
-import { getTeams } from "@/services/buddyBotApi";
+import { EditTeamModal } from "@/components/EditTeamModal";
+import { getTeams, deleteTeam } from "@/services/buddyBotApi";
 import type { BuddyBotTeam } from "@/types/buddyBot";
 
 export default function BuddyBot() {
@@ -17,6 +21,10 @@ export default function BuddyBot() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [teamToDelete, setTeamToDelete] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [teamToEdit, setTeamToEdit] = useState<BuddyBotTeam | null>(null);
 
   useEffect(() => {
     getTeams()
@@ -24,6 +32,23 @@ export default function BuddyBot() {
       .catch((err) => setError(err?.message ?? "Failed to load teams"))
       .finally(() => setLoading(false));
   }, []);
+
+  const handleDeleteConfirm = async () => {
+    if (!teamToDelete) return;
+    setDeleting(true);
+    setDeleteError(null);
+    try {
+      await deleteTeam(teamToDelete);
+      setTeams((prev) => prev.filter((t) => t.name !== teamToDelete));
+      setTeamToDelete(null);
+    } catch (err: unknown) {
+      setDeleteError(
+        err instanceof Error ? err.message : "Failed to delete team",
+      );
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   return (
     <>
@@ -66,7 +91,12 @@ export default function BuddyBot() {
         )}
 
         {teams.map((team) => (
-          <TeamBuddiesTable key={team.name} team={team} />
+          <TeamBuddiesTable
+            key={team.name}
+            team={team}
+            onEdit={() => setTeamToEdit(team)}
+            onDelete={() => setTeamToDelete(team.name)}
+          />
         ))}
       </main>
 
@@ -79,11 +109,45 @@ export default function BuddyBot() {
           }}
         />
       )}
+
+      {teamToDelete && (
+        <DeleteTeamModal
+          teamName={teamToDelete}
+          deleting={deleting}
+          error={deleteError}
+          onConfirm={handleDeleteConfirm}
+          onCancel={() => {
+            setTeamToDelete(null);
+            setDeleteError(null);
+          }}
+        />
+      )}
+
+      {teamToEdit && (
+        <EditTeamModal
+          team={teamToEdit}
+          onClose={() => setTeamToEdit(null)}
+          onUpdated={(updated) => {
+            setTeams((prev) =>
+              prev.map((t) => (t.name === updated.name ? updated : t)),
+            );
+            setTeamToEdit(null);
+          }}
+        />
+      )}
     </>
   );
 }
 
-function TeamBuddiesTable({ team }: { team: BuddyBotTeam }) {
+function TeamBuddiesTable({
+  team,
+  onEdit,
+  onDelete,
+}: {
+  team: BuddyBotTeam;
+  onEdit: () => void;
+  onDelete: () => void;
+}) {
   const buddyEntries = Object.entries(team.buddies ?? {});
   const firstRepo = team.repositories?.[0];
   const repoName = typeof firstRepo === "string" ? firstRepo : firstRepo?.name;
@@ -93,26 +157,45 @@ function TeamBuddiesTable({ team }: { team: BuddyBotTeam }) {
 
   return (
     <section className="mb-10">
-      <div className="flex items-center gap-3 mb-4">
-        {teamRepoUrl ? (
-          <a
-            href={teamRepoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-2 px-2 py-1 -ml-2 rounded-md hover:bg-neutral-50 transition-all"
-          >
-            <h2 className="text-lg font-bold text-neutral-900 group-hover:text-blue-600">
-              {team.name}
-            </h2>
-            <ExternalLink className="w-4 h-4 text-neutral-300 group-hover:text-blue-400" />
-          </a>
-        ) : (
-          <h2 className="text-lg font-bold text-neutral-900">{team.name}</h2>
-        )}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-3">
+          {teamRepoUrl ? (
+            <a
+              href={teamRepoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 px-2 py-1 -ml-2 rounded-md hover:bg-neutral-50 transition-all"
+            >
+              <h2 className="text-lg font-bold text-neutral-900 group-hover:text-blue-600">
+                {team.name}
+              </h2>
+              <ExternalLink className="w-4 h-4 text-neutral-300 group-hover:text-blue-400" />
+            </a>
+          ) : (
+            <h2 className="text-lg font-bold text-neutral-900">{team.name}</h2>
+          )}
 
-        <span className="text-xs font-medium text-neutral-500 bg-neutral-100 border border-neutral-200 rounded-full px-2.5 py-0.5">
-          {buddyEntries.length} Pairings
-        </span>
+          <span className="text-xs font-medium text-neutral-500 bg-neutral-100 border border-neutral-200 rounded-full px-2.5 py-0.5">
+            {buddyEntries.length} Pairings
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onEdit}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 border border-neutral-200 rounded-lg transition-colors"
+          >
+            <Pencil className="w-3.5 h-3.5" />
+            Edit
+          </button>
+          <button
+            onClick={onDelete}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 border border-red-200 rounded-lg transition-colors"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+            Delete
+          </button>
+        </div>
       </div>
 
       {buddyEntries.length === 0 ? (
@@ -173,6 +256,78 @@ function TeamBuddiesTable({ team }: { team: BuddyBotTeam }) {
         </div>
       )}
     </section>
+  );
+}
+
+function DeleteTeamModal({
+  teamName,
+  deleting,
+  error,
+  onConfirm,
+  onCancel,
+}: {
+  teamName: string;
+  deleting: boolean;
+  error: string | null;
+  onConfirm: () => void;
+  onCancel: () => void;
+}) {
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
+      onMouseDown={(e) => {
+        if (e.target === e.currentTarget) onCancel();
+      }}
+    >
+      <div className="w-full max-w-sm bg-white rounded-2xl shadow-2xl border border-neutral-200">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-100">
+          <h2 className="text-base font-semibold text-neutral-900">
+            Delete Team
+          </h2>
+          <button
+            onClick={onCancel}
+            className="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 transition-colors"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+
+        <div className="px-6 py-5 space-y-4">
+          <p className="text-sm text-neutral-600">
+            Are you sure you want to delete{" "}
+            <span className="font-semibold text-neutral-900">"{teamName}"</span>
+            ? This action cannot be undone.
+          </p>
+
+          {error && (
+            <div className="flex items-center gap-2 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              {error}
+            </div>
+          )}
+        </div>
+
+        <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-neutral-100 bg-neutral-50 rounded-b-2xl">
+          <button
+            type="button"
+            onClick={onCancel}
+            disabled={deleting}
+            className="px-4 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors disabled:opacity-50"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={onConfirm}
+            disabled={deleting}
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 disabled:opacity-50 rounded-lg transition-colors"
+          >
+            {deleting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
+            {deleting ? "Deleting…" : "Delete Team"}
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
