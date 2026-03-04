@@ -13,6 +13,7 @@ import {
 import { Navbar } from "@/components/Navbar";
 import { AddTeamModal } from "@/components/AddTeamModal";
 import { EditTeamModal } from "@/components/EditTeamModal";
+import { Button } from "@/components/ui/button";
 import { getTeams, deleteTeam } from "@/services/buddyBotApi";
 import type { BuddyBotTeam } from "@/types/buddyBot";
 
@@ -65,7 +66,7 @@ export default function BuddyBot() {
           </div>
           <button
             onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-700 rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-[#0078E8] hover:bg-[#0058A9] text-white rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
             New Team
@@ -279,52 +280,48 @@ function DeleteTeamModal({
         if (e.target === e.currentTarget) onCancel();
       }}
     >
-      <div className="w-full max-w-sm bg-white rounded-2xl shadow-2xl border border-neutral-200">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-100">
-          <h2 className="text-base font-semibold text-neutral-900">
-            Delete Team
-          </h2>
+      <div className="w-full max-w-sm bg-white rounded-2xl shadow-2xl border border-border">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-border">
+          <h2 className="text-base font-semibold">Delete Team</h2>
           <button
             onClick={onCancel}
-            className="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 transition-colors"
+            className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         <div className="px-6 py-5 space-y-4">
-          <p className="text-sm text-neutral-600">
+          <p className="text-sm text-muted-foreground">
             Are you sure you want to delete{" "}
-            <span className="font-semibold text-neutral-900">"{teamName}"</span>
-            ? This action cannot be undone.
+            <span className="font-semibold text-foreground">"{teamName}"</span>?
+            This action cannot be undone.
           </p>
 
           {error && (
-            <div className="flex items-center gap-2 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
-              <AlertCircle className="w-4 h-4 shrink-0" />
+            <p className="text-sm text-red-600" role="alert">
               {error}
-            </div>
+            </p>
           )}
         </div>
 
-        <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-neutral-100 bg-neutral-50 rounded-b-2xl">
-          <button
+        <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-border bg-muted/30 rounded-b-2xl">
+          <Button
             type="button"
+            variant="ghost"
             onClick={onCancel}
             disabled={deleting}
-            className="px-4 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors disabled:opacity-50"
           >
             Cancel
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
             onClick={onConfirm}
             disabled={deleting}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 disabled:opacity-50 rounded-lg transition-colors"
+            variant="destructive"
           >
-            {deleting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
             {deleting ? "Deleting…" : "Delete Team"}
-          </button>
+          </Button>
         </div>
       </div>
     </div>
