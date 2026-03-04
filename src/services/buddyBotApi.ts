@@ -14,6 +14,7 @@ import type {
   GetTeamResponse,
   GetRepositoriesResponse,
   CreateRepositoryResponse,
+  AddRepositoryResult,
   DeleteRepositoryResponse,
   DeleteTeamResponse,
 } from "@/types/buddyBot";
@@ -115,15 +116,22 @@ export const getRepositories = async (teamName: string): Promise<string[]> => {
   return data.repositories;
 };
 
+const generateSecret = (): string => {
+  const bytes = new Uint8Array(32);
+  crypto.getRandomValues(bytes);
+  return Array.from(bytes, (b) => b.toString(16).padStart(2, "0")).join("");
+};
+
 export const addRepository = async (
   teamName: string,
   repoName: string,
-): Promise<string[]> => {
+): Promise<AddRepositoryResult> => {
+  const github_secret = generateSecret();
   const { data } = await apiClient.post<CreateRepositoryResponse>(
     `/config/teams/${teamName}/repositories`,
-    { name: repoName },
+    { name: repoName, github_secret },
   );
-  return data.repositories;
+  return { repositories: data.repositories, github_secret };
 };
 
 export const deleteRepository = async (

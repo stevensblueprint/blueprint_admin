@@ -51,6 +51,11 @@ export interface CreateRepositoryResponse {
   repositories: string[];
 }
 
+export interface AddRepositoryResult {
+  repositories: string[];
+  github_secret: string;
+}
+
 export interface DeleteRepositoryResponse {
   deleted: string;
 }
